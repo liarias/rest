@@ -1,0 +1,23 @@
+{% extends 'servicios/base.html' %}
+{% load static %}
+{% block js %}   
+{% endblock %}
+{% block content %}
+    <h3>Usuarios</h3>
+	{% for persona in personas %}
+		<div class="container">
+			
+			<div class="prueba" >
+				 <img src="https://vignette.wikia.nocookie.net/laruedadeltiempo/images/5/56/Interrogacion.jpg/revision/latest?cb=20130808205644&path-prefix=es" class="rounded-circle"> 
+				<a href="{% url 'personaDetalle' pk=persona.pk %}">{{persona.nombre}}</a>				
+				<h5>Servicios registrados:</h5>
+				<ul>
+					{% for servicio in persona.servicios.all %}
+						<li>{{servicio.servicio.nombre}}</li>
+					{% endfor %}
+				</ul>	
+			</div>				
+			
+		</div>
+    {% endfor %}
+{% endblock %}

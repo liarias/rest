@@ -1,0 +1,49 @@
+{% extends 'servicios/base.html' %}
+{% load static %}
+{% block content %}
+{% block js %}   
+<script src="{% static 'js/requerimientos.js'  %}"></script>
+{% endblock %}
+<h3>Usuario</h3>
+
+<div class="container">
+	
+	<div class="prueba" >
+		 <img src="https://vignette.wikia.nocookie.net/laruedadeltiempo/images/5/56/Interrogacion.jpg/revision/latest?cb=20130808205644&path-prefix=es" class="rounded-circle"> 
+		<h4>{{persona.nombre}}</h4>				
+		<h5>Servicios registrados:</h5>
+		
+			<table id="example" class="display" style="width:100%">
+				<thead>
+					<tr>
+						<th>Nombres</th>
+						<th>Servicio</th>
+						<th>Ciudad</th>
+						<th>Fecha</th>
+						<th>Direccion</th>
+						<th>Pago</th>
+						<th>Accion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>								
+						{% for servicio in persona.servicios.all %}	
+								<td>{{persona.nombre}}</td>
+								<td>{{servicio.servicio.nombre}}</td>
+								<td>{{servicio.ciudad}}</td>
+								<td>{{servicio.fecha}}</td>
+								<td>{{servicio.direccion}}</td>
+								<td>{{servicio.pago}}</td>
+								<td><a href="{% url 'DetalleServicio' pk=servicio.servicio.id %}">Ver</a></td>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+		 <div>
+		 	<a href="{% url 'servicioCrear' pk=persona.pk %}">Agregar nuevo Servicio</a>
+		 </div>
+	</div>
+
+	
+</div>    
+{% endblock %}
