@@ -1,4 +1,4 @@
-{% extends 'servicios/base.html' %}
+{% extends 'api/base.html' %}
 {% load static %}
 {% block content %}
 {% block js %}   
@@ -13,32 +13,34 @@
 		<h4>{{persona.nombre}}</h4>				
 		<h5>Servicios registrados:</h5>
 		
-			<table id="example" class="display" style="width:100%">
-				<thead>
-					<tr>
-						<th>Nombres</th>
-						<th>Servicio</th>
-						<th>Ciudad</th>
-						<th>Fecha</th>
-						<th>Direccion</th>
-						<th>Pago</th>
-						<th>Accion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>								
-						{% for servicio in persona.servicios.all %}	
-								<td>{{persona.nombre}}</td>
-								<td>{{servicio.servicio.nombre}}</td>
-								<td>{{servicio.ciudad}}</td>
-								<td>{{servicio.fecha}}</td>
-								<td>{{servicio.direccion}}</td>
-								<td>{{servicio.pago}}</td>
-								<td><a href="{% url 'DetalleServicio' pk=servicio.servicio.id %}">Ver</a></td>
-						{% endfor %}
-					</tr>
-				</tbody>
-			</table>
+		<table id="example" class="display" style="width:100%">
+			<thead>
+				<tr>
+					<th>Nombres</th>
+					<th>Servicio</th>
+					<th>Ciudad</th>
+					<th>Fecha</th>
+					<th>Direccion</th>
+					<th>Pago</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+												
+				{% for servicio in persona.servicios.all %}	
+				<tr>
+					<td>{{persona.nombre}}</td>
+					<td>{{servicio.servicio.nombre}}</td>
+					<td>{{servicio.ciudad}}</td>
+					<td>{{servicio.fecha}}</td>
+					<td>{{servicio.direccion}}</td>
+					<td>{{servicio.pago}}</td>
+					<td><a href="{% url 'ServicioDetalle' pk=servicio.id %}">Ver</a></td>
+				</tr>
+				{% endfor %}
+				
+			</tbody>
+		</table>
 		 <div>
 		 	<a href="{% url 'servicioCrear' pk=persona.pk %}">Agregar nuevo Servicio</a>
 		 </div>

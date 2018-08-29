@@ -7,15 +7,13 @@ class ServicioSerializer(serializers.ModelSerializer):
 		model = Servicio
 		fields = "__all__"
 
-class ServicioUsuarioSerializer(serializers.ModelSerializer):
-	servicio = ServicioSerializer()
-	
+class ServicioPersonaSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Persona
+		model = ServicioPersona
 		fields = "__all__"
 
 class PersonaSerializer(serializers.ModelSerializer):
-	servicios = ServicioUsuarioSerializer(many=True)
+	servicios = ServicioPersonaSerializer(many=True)
 	
 	class Meta:
 		model = Persona

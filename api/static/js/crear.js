@@ -7,15 +7,15 @@ function agregar(){
 	console.log("entra boton enviar");
     var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
     info ={}
-    info.owner=Number($(".userId").attr("id")),
-    info.nombre=$("#selectServicio").val(),
+    info.persona=Number($(".userId").attr("id")),
+    info.servicio=Number($("#selectServicio").val());
+    info.fecha=$("#fecha").val();
     info.ciudad="Guayaquil";
     info.direccion=$("#direccion").val();
-    info.fecha=$("#fecha").val();
-    info.pago=0;
+    
     console.log(info)
     $.ajax({
-        url: "/servicio/crearServicio/",
+        url: "/api/guardarServicio/",
         type:"POST",    
         dataType : 'json',
         headers:{"X-CSRFToken": crf_token},
@@ -23,6 +23,7 @@ function agregar(){
         success :function(respuesta) {
         	console.log("exito enviar");
             alert("servicio cargada con éxito");
+            window.location = "/persona/"+$(".userId").attr("id");
         },
         error : function(xhr, status) {
         	console.log("error");
@@ -34,7 +35,7 @@ function agregar(){
 function servicios(){
 	console.log("entra servicios");
     $.ajax({
-        url: "/servicio/crearServicio/",
+        url: "/api/cargarServicios/",
         type:"GET",    
         dataType : 'json',
         success: cargarServicios,
@@ -45,14 +46,12 @@ function servicios(){
 }
 function cargarServicios(data){
 	console.log("entra cargar");
-	var serviciosUnicos=[];
 
     for (servicio of data) {
-    	if(!serviciosUnicos.includes(servicio.nombre)){
-    		serviciosUnicos.push(servicio.nombre)
-    		opcionServicio= '<option value='+servicio.nombre+'>' + servicio.nombre + '</option>';
-    		$('#selectServicio').append(opcionServicio);
-    	}
+    	
+		opcionServicio= '<option value='+servicio.id+'>' + servicio.nombre + '</option>';
+		$('#selectServicio').append(opcionServicio);
+    	
     	
     }
     

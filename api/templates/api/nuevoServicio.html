@@ -1,0 +1,34 @@
+{% extends 'api/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <h3>Nuevo Servicio</h3>
+	{% csrf_token %}
+	<div id="cuadronSevoServicio" class="d-flex flex-column border p-2 col-md-12">
+		<div id="nuevaServicioArriba">
+			<div class="form-group" >
+				<label for="inputTitulo">Usuario: </label>
+				<label class="userId" id={{persona.id}} for="nombreUsuario">  {{persona.nombre}}</label>
+			</div>
+			<div class="form-group">
+				<label for="selectServicio">Servicio: </label>
+				<select class="form-control" id="selectServicio" name="selectServicio">
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="fecha">Fecha registro</label>
+        		<input type="date" class="form-control" id="fecha" name="fecha" placeholder="ingrese fecha">
+     		</div>
+			<div class="form-group">
+				<label for="direccion">Direccion</label><br>
+				<textarea class="form-control" name="direccion" id="direccion" placeholder="Coloca tu direccion" rows=4></textarea>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center">
+			<button type="button" id="botonEnviarServicio" class="btn btn-default col-12">ENVIAR</button>
+		</div>
+		</div>
+   
+{% endblock %}
+{% block scripts %}
+	<script src="{% static 'js/crear.js' %}"></script>
+{% endblock %}
